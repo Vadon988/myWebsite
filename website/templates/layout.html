@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+	<link href="https://fonts.googleapis.com/css?family=Play&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="{{url_for('static',filename='css/layout.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='css/event-box.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='css/news-box.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='css/yt-box.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='css/twitter-box.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='css/git-box.css')}}">
+	
+	<script type="text/javascript" src="{{url_for('static',filename='js/layout.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/index.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/box-event.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/box-news.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/box-yt.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/box-twitter.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/box-git.js')}}"></script>
+
+
+	<title>Login</title>
+</head>
+<body>
+	<div class="wrapper">
+		<nav class="row">
+			<i class="main-brand fas fa-dice"></i>
+			<ul>
+				<li><a href="">Item 1</a></li>
+				<li><a href="">Item 1</a></li>
+				<li><a href="">Item 1</a></li>
+				<li><a href="">Item 1</a></li>
+			</ul>
+			<form action="" class="ml-auto">
+				<input id="g-query" type="text">
+				<button id="g-submit" type="text">Google</button>
+			</form>
+			<i class="main-tog ml-auto fas fa-ellipsis-v"></i>
+		</nav>
+		<div class="x-nav row">
+			<nav class="col-lg-12">
+				<ul>
+					<li><a href="">Item 1</a></li>
+					<li><a href="">Item 1</a></li>
+					<li><a href="">Item 1</a></li>
+					<li><a href="">Item 1</a></li>
+					<li>
+						<form action="" class="ml-auto">
+							<input id="g-query" type="text">
+							<button id="g-submit" type="text">Google</button>
+						</form>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="user-row row">
+			<span class="hello-user">Hello <span id="user-name">{{user}}</span></span>
+			<form class="ml-auto" action="" method="POST">
+				{{logoutForm.csrf_token()}}
+				{{logoutForm.user(id="hidden-user")}}
+				{{logoutForm.outSubmit(id="logout",class="btn btn-outline-default")}}
+			</form>
+			<!--<span id="logout" class="ml-auto">Logout</span>-->
+		</div>
+		<div class="rate-row row">
+			<i class="main-rate-tog fas fa-bars"></i>
+			<ul>
+				<li>
+					<span class="rate-coin">&#x24;</span>
+					<span class="rate-stat">{{rateData[0][1]}}</span>
+					<span class="rate-ex">{{rateData[0][2]}}</span>
+					<span class="rate-arrow">&#x25B2;</span>
+				</li>
+				<li>
+					<span class="rate-coin">&#163;</span>
+					<span class="rate-stat">{{rateData[0][3]}}</span>
+					<span class="rate-ex">{{rateData[0][4]}}</span>
+					<span class="rate-arrow">&#x25BC;</span>
+				</li>
+				<li>
+					<span class="rate-coin">&#165;</span>
+					<span class="rate-stat">{{rateData[0][5]}}</span>
+					<span class="rate-ex">{{rateData[0][6]}}</span>
+					<span class="rate-arrow">&#x25BC;</span>
+				</li>
+				<li>
+					<span class="rate-coin">&#8364;</span>
+					<span class="rate-stat">{{rateData[0][7]}}</span>
+					<span class="rate-ex">{{rateData[0][8]}}</span>
+					<span class="rate-arrow">&#x25BC;</span>
+				</li>
+			</ul>
+			<i class="rate-tog ml-auto fas fa-ellipsis-v"></i>
+		</div>
+		<div class="x-rate-row row">
+			
+			<ul>
+				<li>
+					<span class="rate-coin">&#x24;</span>
+					<span class="rate-stat">4.0000</span>
+					<span class="rate-ex">4.0000</span>
+					<span class="rate-arrow">&#x25B2;</span>
+				</li>
+				<li>
+					<span class="rate-coin">&#163;</span>
+					<span class="rate-stat">4.0000</span>
+					<span class="rate-ex">4.0000</span>
+					<span class="rate-arrow">&#x25BC;</span>
+				</li>
+				<li>
+					<span class="rate-coin">&#165;</span>
+					<span class="rate-stat">4.0000</span>
+					<span class="rate-ex">4.0000</span>
+					<span class="rate-arrow">&#x25BC;</span>
+				</li>
+				<li>
+					<span class="rate-coin">&#8364;</span>
+					<span class="rate-stat">4.0000</span>
+					<span class="rate-ex">4.0000</span>
+					<span class="rate-arrow">&#x25BC;</span>
+				</li>
+			</ul>
+			
+		</div>
+		<div class="container row col-sm-12 col-md-12 col-lg-12">
+			<div class="main-sidebar">1</div>
+			<div class="index-wrapper">
+
+				{% block body %}
+				
+				{% endblock %}
+			</div>
+		</div>
+		<div class="footer row">
+			<!-- Copyright -->
+  				<div class="footer-copyright text-center py-3">© 2019 Copyright:
+    				<a href="" style="font-size: 1.2em;">vadon</a>
+  				</div>
+		</div>
+	</div>
+	<!--------->
+	
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

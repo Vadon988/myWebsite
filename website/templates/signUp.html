@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	
+	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">  
+	<link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Play&display=swap" rel="stylesheet"> 
+
+	<link rel="stylesheet" href="{{url_for('static',filename='css/signup.css')}}">
+	<title>Sign up</title>
+</head>
+<body>
+	<div class="wrapper row">
+		<br>
+		<form class="col-lg-3" action="" method="POST">
+			
+			<div id="welcome" class="row">
+				<h1>Sign Up</h1>
+				{% with messages = get_flashed_messages(with_categories=true) %}
+   				{% if messages %}
+      				{% for category,message in messages %}
+         				<span class="alert alert-{{category}}" style="font-family: Play;margin:5px;background-color: #000000;border:1px solid #000000;">{{ message }}</span>
+     				{% endfor %}
+   				{% endif %}
+			{% endwith %}
+			</div>
+
+			{{sign_up.csrf_token()}}
+			<label for="">New Username:</label>
+			{{sign_up.username(class="form-control")}}
+			<br>
+			<label for="">Email:</label>
+			{{sign_up.email(class="form-control")}}
+			<br>
+			<label for="">Password:</label>
+			{{sign_up.password(class="form-control")}}
+			<br>
+			<label for="">Confirm Password:</label>
+			{{sign_up.confPassword(class="form-control")}}
+			<br>
+			{{sign_up.signSubmit(class="btn btn-outline-primary")}}
+			
+			<div>
+				<img src="{{url_for('static',filename='img/signup_2.gif')}}" alt="">
+			</div>
+			
+		</form>
+		
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

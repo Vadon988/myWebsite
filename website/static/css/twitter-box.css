@@ -1,0 +1,102 @@
+#twitter-box>nav{font-family: Arial;}
+
+#tweet-nav-holder{padding:0px;margin:0px;}
+
+#tweet-nav-ul{list-style: none;padding:0px;margin-top:9px;}
+
+#tweet-nav-ul li{display: inline;margin-right:10px;font-size: 0.9em;}
+
+#tweet-nav-ul li:hover{color:#cdcdcd;}
+
+#tweet-nav-ul li a{text-decoration: none;color:white;}
+
+#tweet-nav-ul li a:hover{color:#cdcdcd;}
+
+#tweet-bird{font-size: 1.8em;width:20%;margin-top:5px;color: #1DA1F2;}
+
+#tweet-nav-form{margin:2px 0px 0px 0px;margin-left: 0px;border:0px solid red;padding:0px;float:right;}
+
+#tweet-nav-form>input{background-color:white;border-radius: 28px;width:170px;height:30px;margin-right: 10px;border:1px solid #000000;}
+
+#tweet-nav-form>img{width:35px;height:35px;border-radius: 50px;margin-right:10px;border:1px solid white;}
+
+#tweet-nav-form>button{width:80px;height:35px;border-radius: 30px;background-color: #1DA1F2;font-weight: bold;border:1px solid #000000;color:white;}
+
+#tweet-nav-form>button:hover{color:#cdcdcd;}
+
+#tweet-bird-2{font-size: 1.8em;margin-top:5px;margin-right:10px;color: #1DA1F2;display: none;}
+
+/**/
+#tweet-bg{height:40%;background-color: #1DA1F2}
+
+#tweet-bg-1{height:60%;background-color: white;}
+
+#tweet-img{position: absolute;top:33%;margin-left:10px;}
+
+#tweet-ul{list-style:none;margin:-32px 0px 0px 45px;font-family: Arial;}
+
+#tweet-ul li{border:0px solid red;line-height: 22px;}
+
+#tweet-stat{color:#000000;margin:100px 0px 0px 10px;font-family: Arial;}
+
+#tweet-stat th{color:#657786;padding-right:28px;}
+
+#tweet-stat tr td{font-weight: bold;font-size: 1.1em;color:#1DA1F2;}
+
+/***************/
+
+#twitter-box{}
+
+#twitter-box .box-content{overflow: scroll;}
+
+#tweet-tbl{width:100%;height:100%;background-color: #1c2a48;overflow: scroll;}
+
+#tweet-tbl tr td{border:1px solid #1c2331;padding:2px 5px;text-align: center;}
+
+#t-link a{text-decoration: none;color:#cdcdcd;font-size: 0.7em;}
+
+#tweet-logo{width:30px;height:30px;border-radius:50px;border:1px solid white;}
+
+#tweet-name{font-size: 0.9em;}
+
+#tweet-text{font-size: 0.9em;}
+
+/*constnet-tog-tweet*/
+
+#tog-tweet{margin:0px;padding:10px;height:100%;}
+
+#tweet-bgH{height: 40%;background-color: #1DA1F2;}
+
+#tweet-bgH>img{position: absolute;top:83%;z-index: 100;}
+
+#tweet-bgH>ul{position: absolute;top:135%;z-index: 100;}
+
+#tweet-bgH1{height:60%;background-color: white;}
+
+/*1350*/
+
+@media only screen and (max-width: 500px){
+	#tweet-tbl{overflow-x: scroll;}
+}
+
+@media only screen and (max-width: 750px){
+
+	#tweet-name{font-size: 0.8em;}
+}
+
+@media only screen and (max-width: 992px){
+
+	#tweet-nav-holder{display:none;}
+
+	#tweet-bird-2{display: inline;}
+}
+
+@media only screen and (max-width: 1144px){
+	
+	#tweet-ul{font-size: 0.9em;}
+	
+	#tweet-stat{font-size: 0.9em;}
+
+	#tweet-stat th{padding-right:20px;}
+}
+

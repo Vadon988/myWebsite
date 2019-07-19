@@ -1,0 +1,765 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+	<!--EVENT-MODULE-->
+	<div id="eventModal" class="modal fade" role="dialog">
+  		<div class="modal-dialog">
+
+    	<!-- Modal content-->
+    		<div class="modal-content">
+     			<div class="modal-header">
+     				<h4 class="modal-title">
+     					 Add event
+     					 <span id="curr_date">Date</span>
+     				</h4>
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+       						
+     			</div>
+      			<div class="modal-body">
+        			<form action="" method="POST">
+        				{{eventForm.csrf_token}}
+        				<label for="">Event:</label>
+        				{{eventForm.event(class="event-field")}}
+        				<br>
+        				<br>
+        				<label for="">Hour:</label>
+        				{{eventForm.hour(class="event-field")}}
+        				<br>
+        				<br>
+        				<label for="">Descreption:</label>
+        				{{eventForm.discreption(id="event-text",class="event-field")}}
+        				<br>
+        				<br>
+        				<label for="">Type:</label>
+        				{{eventForm.type_e(class='event-field')}}
+        				<br>
+        				<br>
+        				{{eventForm.date(id="event-date")}}
+        				{{eventForm.save_e(class="btn btn-outline-primary")}}		
+        			</form>
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      			</div>
+    		</div>
+
+  		</div>
+	</div>
+	<!--------DEL-MODAL-------->
+	<div id="delModal" class="modal fade" role="dialog">
+  		<div class="modal-dialog">
+
+    	<!-- Modal content-->
+    		<div class="modal-content">
+     			<div class="modal-header">
+     				<h4 class="modal-title">
+     					 Delete Event
+     					 <span id="curr_event">Event</span>
+     				</h4>
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+       						
+     			</div>
+      			<div class="modal-body">
+        			<form action="" method="POST">
+        				{{delForm.csrf_token()}}
+        				{{delForm.delName(id="hidden-event")}}
+        				<button class="btn btn-outline-danger" data-dismiss="modal" style="margin-right:70px;">Cancel</button>
+
+        				{{delForm.delSubmit(class="btn btn-outline-primary")}}
+        			</form>
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      			</div>
+    		</div>
+
+  		</div>
+	</div>
+	<!---------------->
+	<!------YT-MODULE------>
+			<div id="ytModal" class="modal fade" role="dialog">
+  				<div class="modal-dialog">
+
+    				<!-- Modal content-->
+   					 <div class="modal-content">
+    				 	 <div class="modal-header">
+        					
+       				 		<h4 class="modal-title">Modal Header</h4>
+       				 		<button type="button" class="close" data-dismiss="modal">&times;</button>
+      					</div>
+     				 	<div class="modal-body">
+       				 		<iframe id="bg-iframe" width="100%" height="100%"
+								src="">
+							</iframe> 
+     				 	</div>
+     				 	<div class="modal-footer">
+     				  		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      					</div>
+   					</div>
+   				</div>
+			</div>
+			<!--------------------->	
+	<div id="event-box">
+		<nav class="row">
+			<span id="upload-time">Time</span>
+				{% with messages = get_flashed_messages(with_categories=true) %}
+   					{% if messages %}
+      					{% for Category,Message in messages %}
+         					<span class="alert alert-{{Category}}" style="">{{ Message }}</span>
+     					{% endfor %}
+   					{% endif %}
+				{% endwith %}
+			<form id="hidden-google-form" class="ml-auto" action="" method="POST">
+				{{googleForm.csrf_token()}}
+				{{googleForm.search(id="hidden-search")}}
+				{{googleForm.submitSearch(id="hidden-submit")}}
+
+			</form>
+			<i id="cal-tog" class="far fa-calendar-alt"></i>
+		</nav>
+		<div class="hidden-cal">
+			<div id="month-tog" class="row">
+				<span id="prev-m" class="m-tog-btn"><i class="fas fa-chevron-left"></i></span>
+				<span class="m-name">April</span>
+				<span id="next-m" class="m-tog-btn"><i class="fas fa-chevron-right"></i></span>
+			</div>
+			<div id="etbl-holder" class="row">
+				<table id="m-tbl">
+					<tr class="dD">
+						<th>Sunday</th>
+						<th>Monday</th>
+						<th>Tuesday</th>
+						<th>Wednesday</th>
+						<th>Thursday</th>
+						<th>Friday</th>
+						<th>Saturday</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="event-holder row">
+			<table id="event-tbl" class="col-lg-12">
+				<tr class="event-tr">
+					<th>Event</th>
+					<th>Date</th>
+					<th id="disc-col">Discription</th>
+					<th>Type</th>
+					<th>Edit</th>
+					<th>Mail</th>
+					<th>Delete</th>
+				</tr>
+				{% for row in eventsData %}
+					<tr>
+						<td class="e-name">{{row[2]}}</td>
+						<td id="e-date" class="e-date">{{row[6]}}</td>
+						<td class="e-hour">{{row[3]}}</td>
+						<td class="e-desc">{{row[4]}}</td>
+						<td class="e-type">{{row[5]}}</td>
+						<td>
+							<span id="e-clipbord" href=""><i class="fas fa-clipboard"></i></span>
+						</td>
+						<td>
+							<span class="e-trash" href=""><i class="fas fa-trash-alt"></i></span>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	<br>
+	<!------NEWS-BOX------>
+	<div id="news-box" class="box">
+		<nav class="row">
+			<i id="box-side-news" class="box-side-tog fas fa-bars"></i>
+			<div class="nav-brand">
+				<a href="https://www.wikipedia.org/" style="text-decoration: none;color:#000000;">
+					<img id="wiki-brand" src="{{url_for('static',filename='img/wiki_logo.png')}}" alt="" style="">
+				</a>
+			</div>
+			<form action="" class="ml-auto" method="POST">
+				{{wikiForm.csrf_token()}}
+				{{wikiForm.query(id="w-input")}}
+				{{wikiForm.submit(id="w-submit")}}
+			</form>
+			<i id="box-tog-news" class="box-tog ml-auto fas fa-ellipsis-v"></i>
+
+		</nav>
+		<div id="x-boxnav-news" class="x-boxnav row">
+			<div class="col-lg-12">
+				<form action="" class="" method="POST">
+					
+				</form>
+			</div>
+		</div>
+		<div class="box-container row">
+			<div class="box-side col-lg-3">
+				<div id="wiki-holder" class="row">
+					<div id="w-title" class="col-sm-12">{{wikiData[0][2]}}</div>
+				</div>
+				<div class="row" style="padding:0px 5px;">
+					<div id="w-content" class="col-sm-12">
+						<p>
+							<img src="{{wikiData[0][4]}}" alt="">
+							{{wikiData[0][3]}}
+						</p>
+					</div>
+				</div>
+				<div class="row" style="padding:0px 5px;background-color: #24292E;">
+					<div id="w-link" class="col-sm-12">
+						<a href="{{wikiData[0][5]}}">Read more...</a>
+					</div>
+				</div>
+			</div>
+			<div id="box-content-news" class="box-content col-lg-9">
+				<div id="content-tog-news" class="content-tog row">
+					<div id="" class="x-form row col-sm-12" style="margin:0px;">
+						<form action="" class="ml-auto" method="POST">
+							{{wikiForm.csrf_token()}}
+							{{wikiForm.query(id="w-input",class="gl-input")}}
+							{{wikiForm.submit(id="w-submit",class="gl-submit")}}
+						</form>
+					</div>
+					<div class="row" style="margin:0px 10px;">
+					<div  id="x-w-title" class="col-sm-12">{{wikiData[0][2]}}</div>
+					<div id="x-w-content" class="x-w-content col-sm-12">
+						<p>
+							<img src="{{wikiData[0][4]}}" alt="" style="width:140px;height:100px;">
+							{{wikiData[0][3]}}
+						</p>
+					</div>
+					<div id="x-w-link" class="col-sm-12">
+						<a href="{{wikiData[0][5]}}">Read more...</a>
+					</div>
+					</div>
+				</div>
+				<div id="news-holder" class="row">
+					
+					<div id="ns" class="ns">
+						{% for row in popmData %}
+							
+						<div class="news-box row">
+							<div id="n-img" class="col-sm-12">
+								<picture>
+									<img src="{{row[2]}}" alt="" style="width:100%;height:130px;">
+								</picture>
+							</div>
+							<div id="n-title" class="col-sm-12">
+								<a href="https://www.popularmechanics.com{{row[1]}}">{{row[4]}}</a>
+							</div>
+							<div id="n-content" class="col-sm-12" style="">{{row[3]}}</div>
+							<div id="n-author" class="col-sm-12">{{row[5]}}</div>
+						</div>
+							
+						{% endfor %}
+					</div>
+					<div id="ns" class="ns">
+						{% for row in scienceData %}
+							
+						<div class="news-box row">
+							<div id="n-img" class="col-sm-12">
+								<picture>
+									<img src="{{row[2]}}" alt="" style="width:100%;height:130px;">
+								</picture>
+							</div>
+							<div id="n-title" class="col-sm-12">
+								<a href="{{row[3]}}">{{row[4]}}</a>
+							</div>
+							<div id="n-content" class="col-sm-12" style="">{{row[5]}}</div>
+							<div id="n-author" class="col-sm-12">None</div>
+						</div>
+							
+						{% endfor %}
+					</div>
+				</div>
+				<div id="prev-news" class="news-slider"><i class="fas fa-chevron-left"></i></div>
+				<div id="next-news" class="news-slider"><i class="fas fa-chevron-right"></i></div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<!----------------->
+	<div id="yt-box" class="box">
+		<nav class="row">
+			<i id="box-side-yt" class="box-side-tog fas fa-bars"></i>
+			<div>
+				<div class="nav-brand">
+					<img id="imdb-brand" src="{{url_for('static',filename='img/imdb-logo.png.jpeg')}}" alt="" style="">
+				</div>
+			</div>
+			<form action="" class="ml-auto" method="POST">
+				{{imdbForm.csrf_token()}}
+				{{imdbForm.imdbQuery(id="i-query")}}
+				{{imdbForm.submitImdb(id="i-submit")}}
+			</form>
+			<i id="box-tog-yt" class="box-tog ml-auto fas fa-ellipsis-v"></i>
+
+		</nav>
+		<div id="x-boxnav-yt" class="x-boxnav row">
+			<div class="col-lg-12">
+				<form action="" class="ml-auto">
+					<input type="text">
+					<button type="submit">Imdb</button>
+				</form>
+			</div>
+		</div>
+		<div class="box-container row">
+			<div class="box-side col-lg-3">
+				<div id="imdb-holder" class="row" >
+					{% for row in imdbData %}
+					<div id="i-slider" class="col-lg-12">
+						<div id="imdb-hH" class="row col-lg-12">
+							<div id="imdb-title-h" class="col-lg-12">
+								{{row[2]}}
+								<span style="font-size: 0.8em;color:#cdcdcd;font-weight: normal;">({{row[3]}})</span>
+							</div>
+							<div id="imdb-col" class="row col-lg-12" style="margin:0px;padding:0px;">
+								<div id="imdb-picH" class="col-lg-6">
+									<img src="{{row[9]}}" alt="" style="width:100%;height:140px;">
+								</div>
+								<div id="imdb-plotH" class="col-lg-6">
+									<ul>
+										<li>{{row[5]}}</li>
+										<li>{{row[11]}}</li>
+										<li>{{row[4]}}</li>
+										<li>{{row[10]}}</li>
+									</ul>
+								</div>
+							</div>
+							<div id="col-pH" class="col-lg-12">
+								<p>{{row[8]}}</p>
+							</div>
+							<div id="col-dH" class="imdb-stufH col-sm-12">
+								Dirctor:<span>{{row[6]}}</span>
+							</div>
+							<div id="col-aH" class="imdb-stufH col-sm-12">
+								Actors:<span>{{row[7]}}</span>
+							</div>
+						</div>
+						
+					</div>
+					{% endfor %}
+				</div>
+				<div id="prev-imdb" class="imdb-slider"><i class="fas fa-chevron-left"></i></div>
+				<div id="next-imdb" class="imdb-slider"><i class="fas fa-chevron-right"></i></div>
+			</div>
+			<div class="box-content col-lg-9">
+				<div id="content-tog-yt" class="content-tog row" style="margin:0px;">
+					<div id="" class="x-form row col-sm-12" style="margin:0px;">
+						<form action="" class="ml-auto" method="POST">
+							{{imdbForm.csrf_token()}}
+							{{imdbForm.imdbQuery(id="i-query",class="gl-input")}}
+							{{imdbForm.submitImdb(id="i-submit",class="gl-submit")}}
+						</form>
+					</div>
+					<div id="x-imdb-holder" class="row">
+					{% for row in imdbData %}
+					<div id="i-slider" class="col-xs-12" style="padding:0px;margin:0px;">
+						<div class="imdb-h row">
+							<div class="col-sm-12" style="padding:0px;">
+								<div id="imdb-title" class="col-sm-12">
+									{{row[2]}}
+									<span style="font-size: 0.9em;color:#cdcdcd;">({{row[3]}})</span>
+								</div>
+								<div id="imdb-cols" class="row" style="">
+									<div id="imdb-pic"class="col-sm-4">
+										<img src="{{row[9]}}" alt="" style="width:100%;height:250px;">
+									</div>
+									<div id="imdb-plot" class="col-sm-8">
+										<ul>
+											<li>{{row[5]}}</li>
+											<li>{{row[11]}}</li>
+											<li>{{row[4]}}</li>
+											<li>{{row[10]}}</li>
+										</ul>
+										<div id="col-p" class="col-sm-12">
+											<p>{{row[8]}}</p>
+										</div>
+										<div id="col-d" class="imdb-stuf col-sm-12">
+											Dirctor:<span>{{row[6]}}</span>
+										</div>
+										<div id="col-a" class="imdb-stuf col-sm-12">
+											Actors:<span>{{row[7]}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<div id="x-prev-imdb" class="imdb-slider"><i class="fas fa-chevron-left"></i></div>
+				<div id="x-next-imdb" class="imdb-slider"><i class="fas fa-chevron-right"></i></div>
+				</div>
+				<div class="yt-holder">
+				{% for row in ytData %}
+					<div class="yt-video-box">
+						<div id="yt-y" class="col-sm-12">
+							<iframe width="100%" height="100%"
+								src="https://www.youtube.com/embed/{{row[4]}}" style="border:0px solid white;">
+							</iframe> 
+						</div>
+						<div id="yt-title" class="col-sm-12">{{row[2]}}</div>
+						<div id="yt-views" class="col-sm-12">{{row[3]}}</div>
+						<div id="yt-btn" class="col-sm-12">
+							<span id="hidden-id" style="visibility:hidden;">{{row[4]}}</span>
+							<i class="yt-mod fab fa-youtube"></i>
+						</div>
+					</div>
+				{% endfor %}
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<br>
+	<!------------------------->
+	<div id="twitter-box" class="box">
+		<nav class="row">
+			<i id="box-side-yt-tweet" class="box-side-tog fas fa-bars"></i>
+			<div id="tweet-nav-holder" class="row col-12">
+				<ul id="tweet-nav-ul" class="col-4">
+					<li>
+						<a href="">Home</a>
+						<i class="fas fa-home"></i>
+					</li>
+					<li>
+						<a href="">Notefications</a>
+						<i class="fas fa-bell"></i>
+					</li>
+					<li>
+						<a href="">Messages</a>
+						<i class="far fa-envelope"></i>
+					</li>
+				</ul>
+				<i id="tweet-bird" class="text-center col-4 fab fa-twitter"></i>
+				<div class="col-4" style="padding:0px;">
+					<form id="tweet-nav-form" class="ml-auto ">
+						<input type="text">
+						<img src="https://pbs.twimg.com/profile_images/676881606582366209/CqxH6TH9_bigger.jpg" alt="" style="">
+						<button>Tweet</button>
+					</form>
+				</div>
+			</div>
+			<i id="tweet-bird-2" class="ml-auto fab fa-twitter"></i>
+			<i id="box-tog-tweet" class="box-tog ml-auto fas fa-ellipsis-v"></i>
+
+		</nav>
+		<div id="x-boxnav-tweet" class="x-boxnav row">
+			<div class="col-lg-12">
+				<form action="" class="ml-auto">
+					<input type="text">
+					<button type="submit">wikpedia</button>
+				</form>
+			</div>
+		</div>
+		<div class="box-container row">
+			<div class="box-side col-lg-3">
+				<div id="tweet-bg" class="row">
+					<div id="tweet-img">
+						<img src="https://pbs.twimg.com/profile_images/676881606582366209/CqxH6TH9_bigger.jpg" alt="" style="width:72px;height:72px;border-radius: 50px;">
+						<ul id="tweet-ul">
+							<li style="color: #000000;font-weight: bold;font-size: 1.1em;">vadon</li>
+							<li style="color:#657786;">@vadon10</li>
+						</ul>
+					</div>
+				</div>
+				<div id="tweet-bg-1" class="row">
+					<table id="tweet-stat">
+						<tr>
+							<th>Tweets</th>
+							<th>Following</th>
+							<th>Followers</th>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>23</td>
+							<td>7</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="twitter-contanier" class="box-content col-lg-9">
+				<div id="content-tog-tweet" class="content-tog row">
+					<div id="tog-tweet" class="row">
+						<div id="tweet-bgH" class="col-12">
+							<img src="https://pbs.twimg.com/profile_images/676881606582366209/CqxH6TH9_bigger.jpg" alt="" style="width:72px;height:72px;border-radius: 50px;">
+							<ul id="tweet-ul">
+								<li style="color: #000000;font-weight: bold;font-size: 1.1em;">vadon</li>
+								<li style="color:#657786;">@vadon10</li>
+							</ul>
+						</div>
+						<div id="tweet-bgH1" class="col-12">
+							<table id="tweet-stat">
+								<tr>
+									<th>Tweets</th>
+									<th>Following</th>
+									<th>Followers</th>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>23</td>
+									<td>7</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<table id="tweet-tbl">
+					{% for row in twitterData %}
+					<tr>
+						<td style="width:5%;">
+							<img id="tweet-logo" src="{{row[5]}}" alt="" style="">
+						</td>
+						<td id="tweet-name" style="font-weight: bold;width:10%;">{{row[4]}}</td>
+						<td style="font-size: 0.7em;color:#cdcdcd;width:15%;">{{row[1]}}</td>
+						<td id="tweet-text" style="color:#fcc038;width:60%;">{{row[2]}}</td>
+						<td id="t-link" style="width:15%;">
+							<a href="{{row[3]}}">{{row[3]}}</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div id="git-box" class="box">
+		<nav class="row">
+			<i id="box-side-git" class="box-side-tog fas fa-bars"></i>
+			<div class="nav-brand"><i class="brand fab fa-github"></i></div>
+			<form id="git-f" action="">
+				<input type="text">
+			</form>
+			<ul id="git-ul">
+				<li>
+					<a href="">Pull requests</a>
+				</li>
+				<li><a href="">Issues</a></li>
+				<li><a href="">Marketplace</a></li>
+				<li><a href="">Explore</a></li>
+			</ul>
+			
+			<ul id="git-user-ul" class="ml-auto">
+				<li>
+					<a href=""><i class="fas fa-bell"></i></a>
+					
+				</li>
+				<li>
+					<a href="">
+						<i class="fas fa-plus"></i>
+						<i class="fas fa-caret-down"></i>
+					</a>
+				</li>
+				<li>
+					<a href="">
+						<img src="https://avatars2.githubusercontent.com/u/20511988?s=40&v=4" alt="" style="width:20px;height:20px;border-radius: 3px;margin:0px 0px 3px 0px;">
+						<i class="fas fa-caret-down"></i>	
+					</a>
+				</li>
+			</ul>
+
+		</nav>
+		<div id="x-boxnav-git" class="x-boxnav row">
+			<div class="col-lg-12">
+				<div class="row" style="margin:0px 5px;">
+					<ul id="x-git-ul">
+						<li><a href="">Pull requests</a></li>
+						<li><a href="">Issues</a></li>
+						<li><a href="">Marketplace</a></li>
+						<li><a href="">Explore</a></li>
+						<li>
+							<form id="git-f" action="" style="margin:0px;">
+								<input type="text" style="width:300px;">
+							</form>
+						</li>
+					</ul>
+					<div class="ml-auto">
+						<ul id="x-git-user-ul" class="">
+							<li>
+								<a href=""><i class="fas fa-bell"></i></a>
+							</li>
+							<li>
+								<a href="">
+									<i class="fas fa-plus"></i>
+									<i class="fas fa-caret-down"></i>
+								</a>
+							</li>
+							<li>
+								<a href="">
+									<img src="https://avatars2.githubusercontent.com/u/20511988?s=40&v=4" alt="" style="width:20px;height:20px;border-radius: 3px;margin:0px 0px 3px 0px;">
+									<i class="fas fa-caret-down"></i>	
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="box-container row">
+			<div class="box-side col-lg-3">
+				<ul id="git-user-data">
+					<li>
+						<img id="git-user-img" src="https://avatars2.githubusercontent.com/u/20511988?s=40&v=4" alt="" style="">
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">User: </span><span>{{gitUserData[0][1]}}</span>
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">Api: </span><a href="">{{gitUserData[0][2]}}</a>
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">Url: </span><a href="">{{gitUserData[0][3]}}</a>
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">Repos: </span><a href="">{{gitUserData[0][4]}}</a>
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">Pub Repos: </span><span>{{gitUserData[0][6]}}</span>
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">Pub Gists: </span><span>{{gitUserData[0][7]}}</span>
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">Followers: </span><span>{{gitUserData[0][8]}}</span>
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">Following: </span><span>{{gitUserData[0][9]}}</span>
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">Updated: </span><span>{{gitUserData[0][10]}}</span>
+					</li>
+					<li>
+						<span id="git-u-b" style="font-size:0.9em;">Created: </span><span>{{gitUserData[0][11]}}</span>
+					</li>
+				</ul>
+			</div>
+			<div id="git-main-box" class="box-content col-lg-9" style="padding:0px;">
+				<div id="content-tog-git" class="content-tog row">
+					<div id="nav-h" class="row col-12">
+						<nav id="tog-git-nav" class="col-12">
+							<div id="x-git-nav-holder" class="row" style="padding:0px 5px;">
+								<form id="git-fH" action="">
+									<input type="text">
+								</form>
+								<ul id="git-ulH">
+									<li>
+										<a href="">Pull requests</a>
+									</li>
+									<li><a href="">Issues</a></li>
+									<li><a href="">Marketplace</a></li>
+									<li><a href="">Explore</a></li>
+								</ul>
+								<ul id="git-user-ulH" class="ml-auto">
+									<li>
+										<a href=""><i class="fas fa-bell"></i></a>
+					
+									</li>
+									<li>
+										<a href="">
+											<i class="fas fa-plus"></i>
+											<i class="fas fa-caret-down"></i>
+										</a>
+									</li>
+									<li>
+										<a href="">
+											<img src="https://avatars2.githubusercontent.com/u/20511988?s=40&v=4" alt="" style="width:20px;height:20px;border-radius: 3px;margin:0px 0px 3px 0px;">
+											<i class="fas fa-caret-down"></i>	
+										</a>
+									</li>
+								</ul>
+							</div>
+							<i id="box-tog-git" class="ml-auto fas fa-ellipsis-v"></i>
+						</nav>
+					</div>
+					<div class="row col-12" style="margin:0px;">
+
+						<ul id="git-user-data">
+							<li>
+								<img src="https://avatars2.githubusercontent.com/u/20511988?s=40&v=4" alt="" style="width:20px;height:20px;border-radius:3px;margin:0px 0px 0px 0px;">
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">User: </span><span>{{gitUserData[0][1]}}</span>
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">Api: </span><a href="">{{gitUserData[0][2]}}</a>
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">Url: </span><a href="">{{gitUserData[0][3]}}</a>
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">Repos: </span><a href="">{{gitUserData[0][4]}}</a>
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">Pub Repos: </span><span>{{gitUserData[0][6]}}</span>
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">Pub Gists: </span><span>{{gitUserData[0][7]}}</span>
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">Followers: </span><span>{{gitUserData[0][8]}}</span>
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">Following: </span><span>{{gitUserData[0][9]}}</span>
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">Updated: </span><span>{{gitUserData[0][10]}}</span>
+							</li>
+							<li>
+								<span id="git-u-b" style="font-size:1em;">Created: </span><span>{{gitUserData[0][11]}}</span>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<div id="git-main-boxH">
+				{% for row in gitRepoData %}
+					<div class="git-b">
+						<ul>
+							<li>
+								<span id="git-b-s">Name: </span><span style="font-size:0.8em;">{{row[1]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Url: </span ><a href="" style="font-size:0.8em;">{{row[2]}}</a>
+							</li>
+							<li>
+								<span id="git-b-s">Disc: </span><span style="font-size:0.8em;">{{row[3]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Created: </span><span style="font-size:0.8em;">{{row[4]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Updated: </span><span style="font-size:0.8em;">{{row[5]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Pushed: </span><span style="font-size:0.8em;">{{row[6]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Api: </span><a href="" style="font-size:0.8em;">{{row[7]}}</a>
+							</li>
+							<li>
+								<span id="git-b-s">Size: </span><span style="font-size:0.8em;">{{row[8]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Languge: </span><span style="font-size:0.8em;">{{row[9]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Issues: </span><span style="font-size:0.8em;">{{row[10]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Projects: </span><span style="font-size:0.8em;">{{row[11]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Watchers: </span><span style="font-size:0.8em;">{{row[12]}}</span>
+							</li>
+							<li>
+								<span id="git-b-s">Branch: </span><span style="font-size:0.8em;">{{row[13]}}</span>
+							</li>
+						</ul>
+					</div>
+				{% endfor %}
+				</div>
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}

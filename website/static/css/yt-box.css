@@ -1,0 +1,171 @@
+#ytModal{}
+
+#ytModal .modal-dialog{margin:100px 400px;}
+
+#ytModal .modal-content{width:70em;height:40em;background-color: #1C2A48;}
+
+#ytModal .modal-body{background-color: #1C2A48;}
+
+#imdb-brand{width:;height:37px;border-radius: 3px;}
+
+/******************/
+
+#i-query{color: white;margin-left:5px;width:250px;}
+
+#i-submit{width:90px;color:white;}
+
+#i-submit:hover{background-color: #1C2331;color:#fcc038;}
+
+/**************/
+
+#yt-box .box-side{padding:0px;}
+
+#imdb-holder{margin:0px;display: flex;flex-direction: row;flex-wrap: nowrap;}
+
+#imdb-holder>div{min-width:100%;height:357px;}
+
+.imdb-slider{position: absolute;top:50%;padding:5px;border:1px solid white;cursor: pointer;background-color: rgba(0,0,0,0.5)}
+
+.imdb-slider:hover{background-color: #cdcdcd;color:#000000;}
+
+#next-imdb{right:0;}
+
+#imdb-insider{margin:0px;}
+
+#imdb-insider>div{padding:2px 10px;}
+
+#i-slider{height:357px;background-color: #212121;margin:0px;font-family: sans-serif;}
+
+#imdb-hH{margin:3px 10px 0px 0px;padding:0px;height:25px;background-color: #24292E;height:340px;}
+
+#imdb-title-h{padding:0px 0px 0px 3px;font-size: 0.9em;color:#fcc038;font-weight: bold;background-color: #333333;}
+
+#imdb-col{padding:0px;height:150px;background-color: #24292E;}
+
+#imdb-picH{padding:5px;}
+
+#imdb-plotH{padding:0px;}
+
+#imdb-plotH>ul{list-style: none;padding:0px;margin-top:5px;margin-left:5px;border:0px solid red;margin-bottom: 0px;font-size: 0.8em;}
+
+#col-pH{padding:0px;background-color: #24292E;font-size: 0.9em;overflow: hidden;}
+
+#col-pH>p{padding:5px;min-height: 50px; max-height:100px;margin-bottom: 0px;overflow: hidden;font-size: 0.8em;}
+
+.imdb-stufH{color:#fcc038;padding:5px;font-size: 0.9em;font-weight: bold;border:0px solid red;background-color: #24292E;}
+
+.imdb-stufH>span{font-size: 0.9em;font-weight: normal;color:white;}
+
+#col-dH{line-height: 10px;}
+
+#col-aH{line-height: 20px;}
+
+
+/***************/
+
+#yt-box .box-content{height:357px;overflow-y:auto;}
+
+#yt-box .box-container .box-content>div{padding:0px;margin:10px;background-color: #263238;}
+
+.yt-holder{display:grid;grid-template-columns: 1fr 1fr 1fr 1fr 1fr;grid-gap:5px;padding:5px;}
+
+.yt-video-box{border:1px solid #9e9e9e;height:200px;overflow:hidden;background-color: #3D3E40;}
+
+#yt-y{height:55%;padding:0px;}
+
+#yt-title{height:21px;background-color: #343434;padding:1px 5px;overflow:hidden;font-weight: bold;font-size: 0.8em;}
+
+#yt-views{height:43px;background-color: #3D3E40;padding:1px 5px;overflow:hidden;font-size: 0.8em;}/*#343434 #992121*/
+
+#yt-btn{height:45px;background-color: #3D3E40;padding:0px;overflow:hidden;}
+
+#yt-btn>i{float:right;height:25px;margin:-3px 10px 0px 0px;font-size: 1.8em;color:red;cursor:pointer;}
+
+#yt-btn>i:hover{color:white;}
+
+/*content-tog-yt*/
+
+#content-tog-yt{}
+
+#x-next-imdb{right:0px;}
+
+#x-imdb-holder{margin:0px;display: flex;flex-direction: row;flex-wrap: nowrap;overflow:hidden;height:320px;}
+
+#x-imdb-holder>div{min-width:100%;}
+
+.imdb-h{margin:3px 0px 3px 0px;padding:0px 10px;}
+
+#imdb-title{font-family: sans-serif;color:#fcc038;background-color: #333333;}
+
+#imdb-cols{padding:0px;margin:0px;height:260px;}
+
+#imdb-pic{padding:5px;background-color: #24292E;}
+
+#imdb-plot{background-color: #24292E;font-family: sans-serif;}
+
+#imdb-plot>ul{list-style: none;padding:0px;margin-top:10px;border:0px solid red;margin-bottom: 0px;font-size: 0.9em;}
+
+#col-p{padding:0px 5px;max-height:97px;overflow: hidden;}
+
+#col-p>p{font-size:0.9em;}
+
+.imdb-stuf{color:#fcc038;padding:5px;font-size: 0.9em;font-weight: bold;border:0px solid red;}
+
+.imdb-stuf>span{font-size: 0.9em;font-weight: normal;color:white;}
+
+#col-d{line-height: 10px;}
+
+#col-a{line-height: 20px;}
+
+
+@media only screen and (max-width: 1800px){
+	#ytModal .modal-dialog{margin:40px;}
+	#ytModal .modal-content{width:150%;height:30em;background-color: #1C2A48;}
+}
+
+@media only screen and (max-width: 820px){
+	#ytModal .modal-dialog{margin:40px;}
+	#ytModal .modal-content{width:100%;height:30em;background-color: #1C2A48;}
+}
+
+
+
+@media only screen and (max-width: 992px){
+	#imdb-brand{height: 28px;margin:5px -10px 0px 0px;}
+}
+
+@media only screen and (max-width: 576px) {
+  
+	#imdb-cols{overflow-y:scroll; }
+}
+
+
+
+@media only screen and (max-width: 850px) {
+  
+	.yt-holder{display:grid;grid-template-columns: 1fr 1fr 1fr;grid-gap:5px;padding:5px;}
+}
+
+@media only screen and (max-width: 490px) {
+  
+	.yt-holder{display:grid;grid-template-columns: 1fr 1fr;grid-gap:5px;padding:5px;}
+}
+
+@media only screen and (max-width: 400px) {
+  
+	.yt-holder{display:grid;grid-template-columns: 1fr;grid-gap:5px;padding:5px;}
+}
+
+@media only screen and (max-width: 425px) {
+  	
+
+	#i-query{width:120px;}
+
+	#i-submit{font-size: 0.7em;width:60px;padding:0px 5px;}
+}
+
+@media only screen and (max-width: 400px){
+	.yt-mod{display: none;}
+	#yt-title{height:40px;}
+	#yt-views{height:43px;}
+}

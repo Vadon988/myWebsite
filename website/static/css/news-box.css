@@ -1,0 +1,115 @@
+
+#wiki-brand{width:;height:40px;}
+
+/**/
+
+#w-input{color: white;margin-left:5px;}
+
+#w-submit{width:90px;color:white;margin-top: 3px;}
+
+#w-submit:hover{background-color: #1C2331;color:#fcc038;}
+
+
+/****WIKI-BOX**/
+
+#w-title{font-weight: bold;color:#fcc038;font-family: sans-serif;background-color: #333333;font-size: 0.9em;}
+
+#w-content{height:285px;padding:5px;overflow: hidden;font-size: 0.9em;font-family:sans-serif;}
+
+#wiki-holder{padding:0px 5px;margin-top:3px;}
+
+#w-content{background-color: #24292E;}
+
+#w-content>p{margin-left:3px;color:#cdcdcd;font-size: 0.8em;}
+
+#w-content>p>img{width:140px;height:100px;float:left;margin:5px 7px 0px 0px;}
+
+#w-link a{float:right;margin-right:10px;font-family:sans-serif;}
+
+/*content-tog-news*/
+
+#content-tog-news{}
+
+#x-w-title{background-color: #333333;color: #fcc038;font-weight: bold;font-family:sans-serif;margin:3px 0px 0px 0px;}
+
+.x-w-content{background-color: #24292E;height:242px;overflow: hidden;}
+
+.x-w-content>p{overflow: hidden;}
+
+.x-w-content>p>img{width:140px;height:100px;float:left;margin:5px 7px 0px 0px;}
+
+#x-w-link{background-color: #24292E;height:40px;}
+
+#x-w-link>a{float:right;margin-right:10px;font-family:sans-serif;}
+
+/*********/
+
+#news-box .box-content{border:0px solid red;padding:0px;}
+
+#news-holder{display:flex;flex-direction:row;flex-wrap:nowrap;margin:0px;}
+
+#news-holder #ns{min-width: 100%;height:357px;padding:10px;}
+
+/**********/
+
+.ns{display:grid;grid-template-columns: 1fr 1fr 1fr 1fr;grid-gap: 10px;margin:0px;}
+
+.news-box{max-width:100%;min-width:100%;border:1px solid white;height:95%;margin:auto;overflow:hidden;border-radius: 3px;}
+
+#n-img{height:40%;padding:0px;}
+
+#n-img>img{}
+
+#n-title{height:15.5%;background-color: #263238;font-weight: bold;padding:0px 5px;border-top:1px solid #37474F;}
+
+#n-title>a{text-decoration: none;color:white;}
+
+#n-content{height:38%;background-color: #37474F;font-size: 0.9em;color:#cdcdcd;}
+
+#n-author{height:7%;background-color: #37474F;text-align: center;padding-top:-10px;color:#cdcdcd;font-size: 0.9em;}
+
+/**********/
+
+.news-slider{position: absolute;top:50%;padding:5px;border:1px solid white;background-color: rgba(0,0,0,0.5);cursor:pointer;}
+
+.news-slider:hover{background-color: #cdcdcd;color:#000000;}
+
+#next-news{right:0;}
+
+/*******************/
+
+/*#news-box-holder{margin:0px;display:grid;grid-template-columns: 1fr 1fr 1fr;grid-gap:10px;}*/
+@media only screen and (max-width: 992px){
+	#wiki-brand{height:30px;margin:5px -10px 0px 0px;}
+}
+
+
+@media only screen and (max-width: 735px) {
+  	
+  	
+
+	.ns{display:grid;grid-template-columns: 1fr 1fr;grid-gap: 10px;margin:0px;}
+
+	.news-box{height:335px;}
+
+	#news-holder{height:357px;overflow-y: scroll;}
+}
+
+@media only screen and (max-width: 470px) {
+  	
+
+	.ns{display:grid;grid-template-columns: 1fr;grid-gap: 10px;margin:0px;}
+
+	.news-box{height:335px;}
+
+	#news-holder{height:357px;overflow-y: scroll;}
+}
+
+@media only screen and (max-width: 425px) {
+  	
+
+	#w-input{width:120px;line-height: 30px;}
+
+	#w-submit{font-size: 0.7em;width:60px;padding:0px 5px;}
+}
+

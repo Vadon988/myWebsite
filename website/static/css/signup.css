@@ -1,0 +1,17 @@
+html,body{background-color:#020102;color:white;}
+
+.wrapper{margin:auto;background-image: url("");background-repeat:no-repeat; background-position: center;}
+
+.wrapper>div{text-align: center;top:10%;}
+
+.wrapper>div>span{position: static;margin-top:50px;}
+
+.wrapper>form{margin:100px auto;color:white;}
+
+.wrapper>form #welcome{margin-left: 20px;margin-bottom:50px;font-family: 'Permanent Marker', cursive;color:;}/*font-family: 'Ruslan Display', cursive;*/
+
+.wrapper>form>.form-control{background-color: #1c2a48;margin:5px 0px;color:#9e9e9e;border:1px solid #9e9e9e;}
+
+.wrapper>form>label{font-weight: bold;margin:0px;color:#9e9e9e;font-family: 'Play', sans-serif;}
+
+.wrapper>form .btn{float: right;margin-right: 20px;}
